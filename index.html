@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anni - Software Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1E90FF',
+            dark: '#121212',
+            darkCard: '#1E1E1E',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+    // 新增：移动端菜单切换功能
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', function() {
+        // 切换菜单显示/隐藏
+        mobileMenu.classList.toggle('hidden');
+        
+        // 切换按钮图标（汉堡→关闭/关闭→汉堡）
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) {
+          if (mobileMenu.classList.contains('hidden')) {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          } else {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          }
+        }
+      });
+    }
+  });
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto { content-visibility: auto; }
+      .text-shadow { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+      .circle-container { position: relative; }
+      .circle-border {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        border: 2px dashed theme('colors.primary');
+        border-radius: 50%;
+        animation: rotate 15s linear infinite;
+      }
+      @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .page-transition {
+        animation: fadeIn 0.8s ease forwards;
+        opacity: 0;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+<body class="bg-dark text-white font-sans">
+  <!-- 顶部导航 -->
+  <header class="max-w-7xl mx-auto px-6 sm:px-8 py-6">
+    <div class="flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold">Anni<span class="text-primary">.</span>Qiu</a>
+      
+      <!-- 桌面端导航 -->
+      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="text-primary border-b-2 border-primary py-1">Home</a>
+        <a href="services.html" class="hover:text-primary transition-colors">Services</a>
+        <a href="resume.html" class="hover:text-primary transition-colors">Resume</a>
+        <a href="work.html" class="hover:text-primary transition-colors">Work</a>
+        <a href="contact.html" class="hover:text-primary transition-colors">Contact</a>
+        <a href="#" class="bg-primary text-dark px-4 py-2 rounded-full hover:bg-primary/90 transition-colors">Hire me</a>
+      </nav>
+      
+      <!-- 移动端菜单按钮 -->
+    <button class="md:hidden text-primary" id="mobile-menu-btn">
+        <i class="fa fa-bars text-2xl"></i>
+    </button>
+    </div>
+    <!-- 新增：移动端菜单容器（默认隐藏） -->
+   <div class="md:hidden hidden mt-4 bg-darkCard p-4 rounded-lg" id="mobile-menu">
+        <nav class="flex flex-col space-y-4">
+      <a href="index.html" class="text-primary py-1">Home</a>
+      <a href="services.html" class="hover:text-primary transition-colors">Services</a>
+      <a href="resume.html" class="hover:text-primary transition-colors">Resume</a>
+      <a href="work.html" class="hover:text-primary transition-colors">Work</a>
+      <a href="contact.html" class="hover:text-primary transition-colors">Contact</a>
+      <a href="#" class="bg-primary text-dark px-4 py-2 rounded-full hover:bg-primary/90 transition-colors text-center">Hire me</a>
+        </nav>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="max-w-7xl mx-auto px-6 sm:px-8 py-10 page-transition">
+    <!-- 个人介绍 -->
+    <section id="home" class="flex flex-col md:flex-row w-full gap-8 items-center py-10">
+      <!-- 左侧文本 -->
+      <div class="md:w-1/2 mb-10 md:mb-0">
+        <p class="text-gray-300 mb-2">Software Developer</p>
+        <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold mb-4">
+          Hello I'm <span class="text-primary"><br>Anni</span>
+        </h1>
+        <p class="text-gray-400 mb-8 max-w-md">
+          With three years of experience in website building and operation. Routinely leverage AI assistants for rapid
+prototyping, auto-completion and bug diagnostics, improving
+delivery efficiency.
+I can independently set up and maintain websites and quickly adapt to different operating systems.
+I also have basic skills in video editing and graphic design,
+and I have managed accounts on Rednote and TikTok, familiar with content publishing and simple data review.
+Proficient in Excel and adept at using PivotTables to summarize and visualize key metrics.
+
+        </p>
+        
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+          <a href="ANNI QIU CV.pdf" class="border border-primary text-primary px-6 py-3 rounded-full hover:bg-primary hover:text-dark transition-colors">
+            Download CV <i class="fa fa-download ml-2"></i>
+          </a>
+          
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 rounded-full border border-primary flex items-center justify-center hover:bg-primary hover:text-dark transition-colors">
+              <i class="fa fa-phone"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full border border-primary flex items-center justify-center hover:bg-primary hover:text-dark transition-colors">
+              <i class="fa fa-linkedin"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full border border-primary flex items-center justify-center hover:bg-primary hover:text-dark transition-colors">
+              <i class="fa fa-github"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full border border-primary flex items-center justify-center hover:bg-primary hover:text-dark transition-colors">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+        
+       
+      </div>
+      
+      <!-- 右侧头像 -->
+      <div class="md:w-1/2 flex justify-center">
+        <div class="circle-container w-72 h-72 md:w-96 md:h-96">
+          <img src="me.jpg" alt="Profile" class="rounded-full w-full h-full object-cover">
+          <div class="circle-border"></div>
+        </div>
+      </div>
+     
+    </section>
+        <!-- 统计数据 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center" id="stats-container">
+  <!-- 统计项内容保持不变 -->
+         <div class="stats-item text-center"> <!-- 可选：添加text-center确保文字本身居中 -->
+            <p class="text-3xl font-bold stats-number" data-target="4">0</p>
+            <p class="text-gray-400 text-sm">Years of experience</p>
+          </div>
+          <div class="stats-item text-center">
+            <p class="text-3xl font-bold stats-number" data-target="100" data-suffix="+">0</p>
+            <p class="text-gray-400 text-sm">Projects completed</p>
+          </div>
+          <div class="stats-item text-center">
+            <p class="text-3xl font-bold stats-number" data-target="8">0</p>
+            <p class="text-gray-400 text-sm">Technologies mastered</p>
+          </div>
+          <div class="stats-item text-center">
+            <p class="text-3xl font-bold stats-number" data-target="500">0</p>
+            <p class="text-gray-400 text-sm">Code commits</p>
+          </div>
+        </div>
+       
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-darkCard py-10 mt-10">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <a href="index.html" class="text-2xl font-bold mb-4 md:mb-0">Anni<span class="text-primary">.</span>Qiu</a>
+        <p class="text-gray-400 text-sm">
+          &copy; 2025 Anni Qiu. All rights reserved.
+        </p>
+      </div>
+    </div>
+  
+  </footer>
+
+  <style>
+    @media (max-width: 768px) {
+      .circle-container {
+        width: 220px;
+        height: 220px;
+      }
+    }
+  </style>
+
+  <script>
+    // 统计数字动画
+    function animateNumber(element) {
+      const target = parseInt(element.dataset.target);
+      const suffix = element.dataset.suffix || '';
+      const duration = 3000;
+      const frameDuration = 16;
+      const totalFrames = duration / frameDuration;
+      let currentFrame = 0;
+      let currentValue = 0;
+
+      function updateNumber() {
+        currentFrame++;
+        currentValue = Math.min(Math.floor((currentFrame / totalFrames) * target), target);
+        element.textContent = currentValue + suffix;
+        
+        if (currentFrame < totalFrames) {
+          requestAnimationFrame(updateNumber);
+        }
+      }
+
+      requestAnimationFrame(updateNumber);
+    }
+
+    function initStatsAnimation() {
+      const statsContainer = document.getElementById('stats-container');
+      if (!statsContainer) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const numberElements = statsContainer.querySelectorAll('.stats-number');
+              numberElements.forEach(animateNumber);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.8 }
+      );
+
+      observer.observe(statsContainer);
+    }
+
+    // 页面加载完成初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      initStatsAnimation();
+    });
+  </script>
+</body>
+</html>

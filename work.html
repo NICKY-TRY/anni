@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anni - Work</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1E90FF',
+            dark: '#121212',
+            darkCard: '#1E1E1E',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto { content-visibility: auto; }
+      .project-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(30, 144, 255, 0.1), 0 8px 10px -6px rgba(30, 144, 255, 0.1);
+      }
+      .project-overlay {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .project-card:hover .project-overlay {
+        opacity: 1;
+      }
+      .filter-btn { transition: all 0.3s ease; }
+      .filter-btn.active {
+        background-color: theme('colors.primary');
+        color: theme('colors.dark');
+      }
+      .page-transition {
+        animation: fadeIn 0.8s ease forwards;
+        opacity: 0;
+      }
+/* 1. 容器：宽度 100%，高度随屏幕（这里按 16:9 举例） */
+.project-card .relative {
+  width: 100%;
+  aspect-ratio: 16 / 9;     /* 随屏幕等比缩放 */
+  overflow: hidden;
+}
+
+/* 2. 图片：高=容器×2，宽=100%， object-top 保证从顶部开始 */
+.project-card img {
+  width: 100%;
+  height: 500%;           /* 关键：图片自身两倍高 */
+  object-fit: cover;
+  object-position: top;
+  transition: transform 3s ease;
+}
+
+/* 3. 悬浮：真正滚完一整张图 */
+.project-card:hover img {
+  transform: translateY(-80%); /* 200% 高 → 滚 50% 正好一张图 */
+}
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+<body class="bg-dark text-white font-sans">
+  <!-- 顶部导航 -->
+  <header class="max-w-7xl mx-auto px-6 sm:px-8 py-6">
+    <div class="flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold">Anni<span class="text-primary">.</span>Qiu</a>
+      
+      <!-- 桌面端导航 -->
+      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+        <a href="services.html" class="hover:text-primary transition-colors">Services</a>
+        <a href="resume.html" class="hover:text-primary transition-colors">Resume</a>
+        <a href="work.html" class="text-primary border-b-2 border-primary py-1">Work</a>
+        <a href="contact.html" class="hover:text-primary transition-colors">Contact</a>
+        <a href="#" class="bg-primary text-dark px-4 py-2 rounded-full hover:bg-primary/90 transition-colors">Hire me</a>
+      </nav>
+      
+      <!-- 移动端菜单按钮 -->
+    <button class="md:hidden text-primary" id="mobile-menu-btn" aria-label="Toggle menu">
+      <i class="fa fa-bars text-2xl"></i>
+    </button>
+    </div>
+    
+    <!-- 移动端菜单 -->
+    <div class="md:hidden hidden mt-4 bg-darkCard p-4 rounded-lg" id="mobile-menu">
+      <nav class="flex flex-col space-y-4">
+        <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+        <a href="services.html" class="hover:text-primary transition-colors">Services</a>
+        <a href="resume.html" class="hover:text-primary transition-colors">Resume</a>
+        <a href="work.html" class="text-primary py-1">Work</a>
+        <a href="contact.html" class="hover:text-primary transition-colors">Contact</a>
+        <a href="#" class="bg-primary text-dark px-4 py-2 rounded-full hover:bg-primary/90 transition-colors text-center">Hire me</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="max-w-7xl mx-auto px-6 sm:px-8 py-10 page-transition">
+    <!-- 作品板块 -->
+    <section id="work" class="py-20">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">My <span class="text-primary">Work</span></h2>
+        <div class="w-20 h-1 bg-primary mx-auto mb-8"></div>
+        
+        <!-- 过滤按钮 -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+          <button class="filter-btn active bg-darkCard text-white px-5 py-2 rounded-full hover:bg-primary/20" data-filter="all">
+            All
+          </button>
+          <button class="filter-btn bg-darkCard text-white px-5 py-2 rounded-full hover:bg-primary/20" data-filter="web">
+            Web
+          </button>
+          <button class="filter-btn bg-darkCard text-white px-5 py-2 rounded-full hover:bg-primary/20" data-filter="mobile">
+            Mobile
+          </button>
+          <button class="filter-btn bg-darkCard text-white px-5 py-2 rounded-full hover:bg-primary/20" data-filter="design">
+            Design
+          </button>
+        </div>
+      </div>
+      
+      <!-- 作品网格 -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 作品1 -->
+        <div class="project-card bg-darkCard rounded-lg overflow-hidden group" data-category="web">
+          <div class="relative overflow-hidden">
+            <img src="showcase2.jpg" alt="E-commerce Website" class="w-full h-64 object-cover transition-transform 0.5s ease">
+            <div class="project-overlay absolute inset-0 bg-primary/80 flex items-center justify-center">
+              <a href="#" class="bg-white text-dark px-4 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                View Project
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">E-commerce Website</h3>
+            <p class="text-gray-400 mb-4">A fully functional online store with payment integration</p>
+            <span class="text-primary text-sm">Web Development</span>
+          </div>
+        </div>
+        
+        <!-- 作品2 -->
+        <div class="project-card bg-darkCard rounded-lg overflow-hidden group" data-category="design">
+          <div class="relative overflow-hidden">
+            <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4a62c0e09abf4ff0945d74d3ee020600.jpg~tplv-a9rns2rl98-24:720:720.image" alt="Brand Identity" class="w-full h-64 object-cover transition-transform 0.5s ease">
+            <div class="project-overlay absolute inset-0 bg-primary/80 flex items-center justify-center">
+              <a href="#" class="bg-white text-dark px-4 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                View Project
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Brand Identity</h3>
+            <p class="text-gray-400 mb-4">Complete brand design including logo and guidelines</p>
+            <span class="text-primary text-sm">Graphic Design</span>
+          </div>
+        </div>
+        
+        <!-- 作品3 -->
+        <div class="project-card bg-darkCard rounded-lg overflow-hidden group" data-category="mobile">
+          <div class="relative overflow-hidden">
+            <img src="https://p26-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/78af0ddd5e0f4db2af1ce14ca7e1d956.png~tplv-a9rns2rl98-24:720:720.png" alt="Fitness App" class="w-full h-64 object-cover transition-transform 0.5s ease">
+            <div class="project-overlay absolute inset-0 bg-primary/80 flex items-center justify-center">
+              <a href="#" class="bg-white text-dark px-4 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                View Project
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Fitness App</h3>
+            <p class="text-gray-400 mb-4">Mobile application for tracking workouts and nutrition</p>
+            <span class="text-primary text-sm">Mobile Development</span>
+          </div>
+        </div>
+        
+        <!-- 作品4 -->
+        <div class="project-card bg-darkCard rounded-lg overflow-hidden group" data-category="web">
+          <div class="relative overflow-hidden">
+            <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/d3eccb1e094c41fa9e0d785335f4872f.jpg~tplv-a9rns2rl98-24:720:720.image" alt="Dashboard UI" class="w-full h-64 object-cover transition-transform 0.5s ease">
+            <div class="project-overlay absolute inset-0 bg-primary/80 flex items-center justify-center">
+              <a href="#" class="bg-white text-dark px-4 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                View Project
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Analytics Dashboard</h3>
+            <p class="text-gray-400 mb-4">Data visualization platform with real-time updates</p>
+            <span class="text-primary text-sm">Web Development</span>
+          </div>
+        </div>
+        
+        <!-- 作品5 -->
+        <div class="project-card bg-darkCard rounded-lg overflow-hidden group" data-category="design">
+          <div class="relative overflow-hidden">
+            <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/4a62c0e09abf4ff0945d74d3ee020600.jpg~tplv-a9rns2rl98-24:720:720.image" alt="UI Redesign" class="w-full h-64 object-cover transition-transform 0.5s ease">
+            <div class="project-overlay absolute inset-0 bg-primary/80 flex items-center justify-center">
+              <a href="#" class="bg-white text-dark px-4 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                View Project
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">UI Redesign</h3>
+            <p class="text-gray-400 mb-4">Complete overhaul of a SaaS platform interface</p>
+            <span class="text-primary text-sm">UI/UX Design</span>
+          </div>
+        </div>
+        
+        <!-- 作品6 -->
+        <div class="project-card bg-darkCard rounded-lg overflow-hidden group" data-category="mobile">
+          <div class="relative overflow-hidden">
+            <img src="https://p26-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/78af0ddd5e0f4db2af1ce14ca7e1d956.png~tplv-a9rns2rl98-24:720:720.png" alt="Travel App" class="w-full h-64 object-cover transition-transform 0.5s ease">
+            <div class="project-overlay absolute inset-0 bg-primary/80 flex items-center justify-center">
+              <a href="#" class="bg-white text-dark px-4 py-2 rounded-full font-medium hover:bg-opacity-90 transition-colors">
+                View Project
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Travel Companion</h3>
+            <p class="text-gray-400 mb-4">App for planning trips and discovering local attractions</p>
+            <span class="text-primary text-sm">Mobile Development</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-darkCard py-10 mt-10">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <a href="index.html" class="text-2xl font-bold mb-4 md:mb-0">Anni<span class="text-primary">.</span>Qiu</a>
+        <p class="text-gray-400 text-sm">
+          &copy; 2023 Anni Qiu. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 移动端菜单切换
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // 作品过滤功能
+    function initWorkFilter() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // 更新按钮状态
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          const filter = button.getAttribute('data-filter');
+          
+          // 过滤作品
+          projectCards.forEach(card => {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+              card.style.display = 'block';
+              // 添加显示动画
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+              }, 50);
+            } else {
+              // 添加隐藏动画
+              card.style.opacity = '0';
+              card.style.transform = 'scale(0.8)';
+              card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+              
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 300);
+            }
+          });
+        });
+      });
+    }
+
+    // 页面加载完成初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      initWorkFilter();
+    });
+  </script>
+</body>
+</html>

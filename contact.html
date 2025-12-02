@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anni - Contact</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1E90FF',
+            dark: '#121212',
+            darkCard: '#1E1E1E',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto { content-visibility: auto; }
+      .contact-item { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+      .contact-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(30, 144, 255, 0.1), 0 8px 10px -6px rgba(30, 144, 255, 0.1);
+      }
+      .form-input {
+        @apply bg-darkCard border border-gray-700 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-primary transition-colors;
+      }
+      .page-transition {
+        animation: fadeIn 0.8s ease forwards;
+        opacity: 0;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+<body class="bg-dark text-white font-sans">
+  <!-- 顶部导航 -->
+  <header class="max-w-7xl mx-auto px-6 sm:px-8 py-6">
+    <div class="flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold">Anni<span class="text-primary">.</span>Qiu</a>
+      
+      <!-- 桌面端导航 -->
+      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+        <a href="services.html" class="hover:text-primary transition-colors">Services</a>
+        <a href="resume.html" class="hover:text-primary transition-colors">Resume</a>
+        <a href="work.html" class="hover:text-primary transition-colors">Work</a>
+        <a href="contact.html" class="text-primary border-b-2 border-primary py-1">Contact</a>
+        <a href="#" class="bg-primary text-dark px-4 py-2 rounded-full hover:bg-primary/90 transition-colors">Hire me</a>
+      </nav>
+      
+      <!-- 移动端菜单按钮 -->
+    <button class="md:hidden text-primary" id="mobile-menu-btn" aria-label="Toggle menu">
+      <i class="fa fa-bars text-2xl"></i>
+    </button>
+    </div>
+    
+    <!-- 移动端菜单 -->
+    <div class="md:hidden hidden mt-4 bg-darkCard p-4 rounded-lg" id="mobile-menu">
+      <nav class="flex flex-col space-y-4">
+        <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+        <a href="services.html" class="hover:text-primary transition-colors">Services</a>
+        <a href="resume.html" class="hover:text-primary transition-colors">Resume</a>
+        <a href="work.html" class="hover:text-primary transition-colors">Work</a>
+        <a href="contact.html" class="text-primary py-1">Contact</a>
+        <a href="#" class="bg-primary text-dark px-4 py-2 rounded-full hover:bg-primary/90 transition-colors text-center">Hire me</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="max-w-7xl mx-auto px-6 sm:px-8 py-10 page-transition">
+    <!-- 联系板块 -->
+    <section id="contact" class="py-20">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">Get In <span class="text-primary">Touch</span></h2>
+        <div class="w-20 h-1 bg-primary mx-auto"></div>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row gap-10">
+        <!-- 左侧联系信息 -->
+        <div class="lg:w-1/3">
+          <div class="space-y-6">
+            <!-- 联系项1 -->
+            <div class="contact-item bg-darkCard p-6 rounded-lg border border-gray-800">
+              <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                <i class="fa fa-map-marker text-2xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Location</h3>
+              <p class="text-gray-400">HONG KONG</p>
+            </div>
+            
+            <!-- 联系项2 -->
+            <div class="contact-item bg-darkCard p-6 rounded-lg border border-gray-800">
+              <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                <i class="fa fa-envelope text-2xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Email</h3>
+              <p class="text-gray-400">qiuanni12@gmail.com</p>
+            </div>
+            
+            <!-- 联系项3 -->
+            <div class="contact-item bg-darkCard p-6 rounded-lg border border-gray-800">
+              <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                <i class="fa fa-phone text-2xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Phone</h3>
+              <p class="text-gray-400">+852 63036461</p>
+            </div>
+          </div>
+          
+          <!-- 社交媒体 -->
+          <div class="mt-10">
+            <h3 class="text-xl font-bold mb-6">Follow Me</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="w-12 h-12 rounded-full bg-darkCard flex items-center justify-center hover:bg-primary hover:text-dark transition-colors">
+                <i class="fa fa-linkedin"></i>
+              </a>
+              <a href="#" class="w-12 h-12 rounded-full bg-darkCard flex items-center justify-center hover:bg-primary hover:text-dark transition-colors">
+                <i class="fa fa-github"></i>
+              </a>
+              <a href="#" class="w-12 h-12 rounded-full bg-darkCard flex items-center justify-center hover:bg-primary hover:text-dark transition-colors">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a href="#" class="w-12 h-12 rounded-full bg-darkCard flex items-center justify-center hover:bg-primary hover:text-dark transition-colors">
+                <i class="fa fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 右侧联系表单 -->
+        <div class="lg:w-2/3">
+          <form id="contact-form" class="bg-darkCard p-8 rounded-lg border border-gray-800">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                <input type="text" id="name" class="form-input" required>
+              </div>
+              <div>
+                <label for="email" class="block text-gray-300 mb-2">Your Email</label>
+                <input type="email" id="email" class="form-input" required>
+              </div>
+            </div>
+            
+            <div class="mb-6">
+              <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+              <input type="text" id="subject" class="form-input" required>
+            </div>
+            
+            <div class="mb-6">
+              <label for="message" class="block text-gray-300 mb-2">Your Message</label>
+              <textarea id="message" rows="6" class="form-input" required></textarea>
+            </div>
+            
+            <button type="submit" class="bg-primary text-dark px-8 py-3 rounded-full hover:bg-primary/90 transition-colors font-medium">
+              Send Message <i class="fa fa-paper-plane ml-2"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-darkCard py-10 mt-10">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <a href="index.html" class="text-2xl font-bold mb-4 md:mb-0">Anni<span class="text-primary">.</span>Qiu</a>
+        <p class="text-gray-400 text-sm">
+          &copy; 2025 Anni Qiu. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 移动端菜单切换
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // 表单提交处理
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // 模拟表单提交
+      const submitButton = this.querySelector('button[type="submit"]');
+      const originalText = submitButton.innerHTML;
+      
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> Sending...';
+      
+      setTimeout(() => {
+        // 重置表单
+        this.reset();
+        
+        // 显示成功消息
+        submitButton.innerHTML = '<i class="fa fa-check mr-2"></i> Message Sent!';
+        submitButton.classList.remove('bg-primary');
+        submitButton.classList.add('bg-green-600');
+        
+        // 恢复按钮状态
+        setTimeout(() => {
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalText;
+          submitButton.classList.remove('bg-green-600');
+          submitButton.classList.add('bg-primary');
+        }, 3000);
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
